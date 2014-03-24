@@ -1,0 +1,322 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Protractor: writing end-to-end test has never been so fun</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/protractor.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1 style="margin: 50px 0 .3em">Protractor</h1>
+					<h3 style="font-size:1.2em">Writing end-to-end test has never been so fun</h3>
+				</section>
+
+				<section>
+					<h2>What is it about?</h2>
+					<ul>
+						<li>End-to-End test for AngularJS != Unit test (Karma)</li>
+						<li>Built on top of <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">WebDriverJS</a> (Selenium server)</li>
+						<li><a href="http://jasmine.github.io/2.0/introduction.html">Jasmine</a> test syntax</li>
+						<li>Maintained by <a href="https://github.com/juliemr">@juliemr</a> on <a href="https://github.com/angular/protractor">Github</a></li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Install</h2>
+					<ol>
+						<li>
+							Download <a href="http://nodejs.org/download/">Noje.JS</a>
+						</li>
+						<li><code>(sudo) npm install -g protractor</code></li>
+						<li><code>(sudo) webdriver-manager update</code></li>
+						<li><code>webdriver-manager start</code></li>
+					</ol>
+
+				</section>
+
+				<section>
+					<h2>Setup a conf.js file</h2>
+					<pre><code>exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  capabilities: {
+    'browserName': 'chrome'
+  },
+
+  specs: ['example-spec.js'],
+
+  jasmineNodeOpts: {
+    showColors: true
+  }
+};</code></pre>
+				</section>
+
+				<section>
+					<h2>Writing tests</h2>
+					<p>Protractor exposes several global variables:</p>
+					<ul>
+						<li><code>browser</code>: <code>browser.get()</code></li>
+						<li><code>element</code> and <code>by</code>: <code>element(by.model('yourName'))</code></li>
+						<li><code>protractor</code>: <code>protractor.Key</code></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Basic example</h2>
+					<pre><code data-trim="" style="font-size:20px;line-height:1em">describe('angularjs homepage', function() {
+  it('should greet the named user', function() {
+    browser.get('http://www.angularjs.org');
+
+    element(by.model('yourName')).sendKeys('Julie');
+
+    var greeting = element(by.binding('yourName'));
+
+    expect(greeting.getText()).toEqual('Hello Julie!');
+  });
+});</code></pre>
+				</section>
+
+				<section>
+					<h2 style="font-size:3em;margin-top: 50px">Searching elements on the page</h2>
+				</section>
+
+				<section>
+					<h2 style="font-size:1.5em;"><code>element()</code> vs <code>element.all()</code></h2>
+					<!-- TODO -->
+				</section>
+
+				<section>
+					<h2><code>by.binding</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.binding('myModel') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;span ng-bind="myModel">&lt;/span>
+&lt;!-- or -->
+&lt;span>{{myModel}}&lt;/span>
+</code></pre>
+				</section>
+
+				<section>
+					<h2><code>by.model</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.model('myModel') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;input ng-model="myModel" /></code></pre>
+				</section>
+				<section>
+					<h2><code>by.repeater</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.repeater('user in users').row(0).column('name') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;ul ng-model="user in users">
+  &lt;li>
+      &lt;span>{{user.name}}&lt;/span>
+  &lt;/li>
+&lt;/ul></code></pre>
+				</section>
+
+				<section>
+					<h2>Protractor API</h2>
+					<ul>
+						<li><code>by.select()</code></li>
+						<li><code>by.partialButtonText()</code></li>
+						<li><code>elementArrayFinder.each()</code></li>
+						<li>
+							<a href="https://github.com/angular/protractor/blob/master/docs/api.md">
+								Full list of available methods
+							</a>
+						</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h2 style="font-size:3em;margin-top: 50px">Executing events</h2>
+				</section>
+
+				<section>
+					<h2><code>.click()</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.css('[ng-click="submit()"]') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;button ng-click="submit()">&lt;button></code></pre>
+				</section>
+
+				<section>
+					<h2>On Enter Press</h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.model('commentText') ).sendKeys("Hi!", protractor.Key.ENTER);</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;textarea ng-model="commentText">&lt;textarea></code></pre>
+				</section>
+
+				<section>
+					<h2>Examples</h2>
+				</section>
+
+				<section>
+					<h2>Searching elements best practices</h2>
+					<ul>
+						<li>Take advantage of AngularJS attributes using <code>by.model</code>, <code>by.repeater</code>, etc</li>
+						<li>Avoid using potential CSS attributes, mainly IDs and Classes.</li>
+					</ul>
+					
+				</section>
+
+				<section>
+					<h2 style="font-size:3em;margin: 50px 0 30px;">Maintanable Tests</h2>
+					<h3>Best practices to organize or tests</h3>
+				</section>
+
+				<section>
+					<h2>Page Objects</h2>
+					<pre><code data-trim>var AngularHomepage = function() {
+  this.nameInput = element(by.model('yourName'));
+  this.greeting = element(by.binding('yourName'));
+
+  this.get = function() {
+    browser.get('http://www.angularjs.org');
+  };
+
+  this.setName = function(name) {
+    this.nameInput.sendKeys(name);
+  };
+};</code></pre>
+				</section>
+
+				<section>
+					<h2>Inherit global elements</h2>
+					<pre><code data-trim>//TODO example</code></pre>
+				</section>
+
+				<section>
+					<h2>Node.JS exports and require</h2>
+				</section>
+
+				<section>
+					<h2>Separate your tests in various test suites</h2>
+<pre><code data-trim>exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  capabilities: { 'browserName': 'chrome' },
+
+  suites: {
+    homepage: 'tests/e2e/homepage/**/*Spec.js',
+    search: ['tests/e2e/contact_search/**/*Spec.js', 'tests/e2e/venue_search/**/*Spec.js']
+  },
+
+  jasmineNodeOpts: { showColors: true }
+};</code></pre>
+<strong>running specific suite of tests</strong>
+<pre><code>protractor protractor.conf.js --suite homepage</code></pre>
+				</section>
+
+				<section>
+					<h2 style="font-size:3em;margin-top:30px">Other config.js advanced tips</h2>
+				</section>
+
+				<section>
+					<h2>Enable <code>multiCapabilities</code></h2>
+				</section>
+
+				<section>
+					<h2>Using <code>onPrepare</code></h2>
+				</section>
+
+				<section>
+					<h2>Using <code>params</code></h2>
+				</section>
+
+				<section>
+					<h2>Enable <code>isVerbose</code></h2>
+				</section>
+
+
+				<section>
+					<h2>Final thoughts</h2>
+					<ul>
+						<li>E2E test != Unit test</li>
+						<li>Avoid using CSS attributes</li>
+						<li>Write your tests with scalability in mind</li>
+						<li>Finally, have fun testing with Protractor</li>
+					</ul>
+				</section>
+
+				<section>
+					<a href="https://github.com/angular/protractor/">
+						<img src="img/protractor-on-github.png" width="900" alt="">
+					</a>
+				</section>
+
+				<section>
+					<h3 style="font-size:3em;margin-top:30px">Thank you :)</h3>
+					<a href="https://github.com/ramonvictor">@ramonvictor</a>
+				</section>
+
+			</div>
+			
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				rollingLinks: false,
+				
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/linear(2d)
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/zoom-js/zoom.js', condition: function() { return !!document.body.classList; } },
+					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } }
+				]
+			});
+			
+		</script>
+
+	</body>
+</html>
