@@ -256,10 +256,32 @@
 
 				<section>
 					<h2>Enable <code>multiCapabilities</code></h2>
+<pre><code data-trim>multiCapabilities: [{
+'browserName': 'chrome'
+}, {
+'browserName: 'firefox'
+}],</code></pre></br>
+  <strong>Enables parallel execution in multiple browsers</strong></br>
+  <p>Once the <code>multiCapabilities</code> option is defined in the <strong>config.js</strong> file, Protractor ignores the option <code>Capabilities</code></p>
 				</section>
 
 				<section>
 					<h2>Using <code>onPrepare</code></h2>
+<pre><code data-trim> onPrepare: function() {
+
+},
+</code></pre>
+<strong>A callback function called before the specs are executed.</strong></br></br>
+<p>Example: Export xml results of your Automated Suites</p>
+<pre><code data-trim>onPrepare: function() {
+
+    require ('jasmine-reporters');
+    jasmine.getEnv().addReporter(
+      new jasmine.JUnitXmlReporter('./', true, true));
+
+  },
+</code></pre>
+
 				</section>
 
 				<section>
