@@ -230,6 +230,22 @@
 
 				<section>
 					<h2>Node.JS exports and require</h2>
+<strong>Your Page Object file</strong>
+<pre><code>...
+  this.setName = function(name) {
+    this.nameInput.sendKeys(name);
+  };
+};
+module.exports.FileName = FileName;
+</code></pre>
+<strong>Your Test file</strong>
+<pre><code>
+var PageObject = require('./HomePage');
+	
+	describe('HomePage Tests', function(){
+		var H = new PageObject.HomePage();
+		...
+</code></pre>
 				</section>
 
 				<section>
@@ -262,7 +278,6 @@
 'browserName: 'firefox'
 }],</code></pre></br>
   <strong>Enables parallel execution in multiple browsers</strong></br>
-  <p>Once the <code>multiCapabilities</code> option is defined in the <strong>config.js</strong> file, Protractor ignores the option <code>Capabilities</code></p>
 				</section>
 
 				<section>
@@ -271,8 +286,8 @@
 
 },
 </code></pre>
-<strong>A callback function called before the specs are executed.</strong></br></br>
 <p>Example: Export xml results of your Automated Suites</p>
+<pre><code data-trim>(sudo) npm install jasmine-reporters</code></pre>
 <pre><code data-trim>onPrepare: function() {
 
     require ('jasmine-reporters');
@@ -286,10 +301,32 @@
 
 				<section>
 					<h2>Using <code>params</code></h2>
+<p>Parameters will be passed to the Protractor instance to be accessed from your test</p>
+<p></p>
+<pre><code data-trim>  params: {
+    login: {
+      user: 'Jane',
+      password: '1234'
+    }
+  },
+</code></pre>
 				</section>
 
 				<section>
-					<h2>Enable <code>isVerbose</code></h2>
+					<h2>Using <code>jasmineNodeOpts</code></h2>
+<pre><code data-trim>  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000,
+    isVerbose: true,
+    includeStackTrace: true
+  }
+</pre></code></br>
+				<ul>
+					<li>
+						<a href = "https://github.com/juliemr/minijasminenode">More on jasmineNodeOpts
+						</a>
+					</li>
+				</ul>
 				</section>
 
 
