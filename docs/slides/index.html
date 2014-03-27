@@ -79,7 +79,8 @@
   jasmineNodeOpts: {
     showColors: true
   }
-};</code></pre>
+};
+</code></pre>
 				</section>
 
 				<section>
@@ -104,7 +105,8 @@
 
     expect(greeting.getText()).toEqual('Hello Julie!');
   });
-});</code></pre>
+});
+</code></pre>
 				</section>
 
 				<section>
@@ -230,18 +232,16 @@
 
 				<section>
 					<h2>Node.JS exports and require</h2>
-<strong>Your Page Object file</strong>
-<pre><code>...
+					<strong>Your Page Object file</strong>
+					<pre><code>...
   this.setName = function(name) {
     this.nameInput.sendKeys(name);
   };
 };
 module.exports.FileName = FileName;
 </code></pre>
-<strong>Your Test file</strong>
-<pre><code>
-var PageObject = require('./HomePage');
-	
+					<strong>Your Test file</strong>
+					<pre><code>var PageObject = require('./HomePage');
 	describe('HomePage Tests', function(){
 		var H = new PageObject.HomePage();
 		...
@@ -250,7 +250,7 @@ var PageObject = require('./HomePage');
 
 				<section>
 					<h2>Separate your tests in various test suites</h2>
-<pre><code data-trim>exports.config = {
+					<pre><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
   capabilities: { 'browserName': 'chrome' },
@@ -261,9 +261,11 @@ var PageObject = require('./HomePage');
   },
 
   jasmineNodeOpts: { showColors: true }
-};</code></pre>
-<strong>running specific suite of tests</strong>
-<pre><code>protractor protractor.conf.js --suite homepage</code></pre>
+};
+</code></pre>
+				<strong>running specific suite of tests</strong>
+				<pre><code>protractor protractor.conf.js --suite homepage
+				</code></pre>
 				</section>
 
 				<section>
@@ -272,23 +274,25 @@ var PageObject = require('./HomePage');
 
 				<section>
 					<h2>Enable <code>multiCapabilities</code></h2>
-<pre><code data-trim>multiCapabilities: [{
+					<pre><code data-trim>multiCapabilities: [{
 'browserName': 'chrome'
 }, {
 'browserName: 'firefox'
-}],</code></pre></br>
-  <strong>Enables parallel execution in multiple browsers</strong></br>
+}],
+</code></pre></br>
+  				<strong>Enables parallel execution in multiple browsers</strong></br>
 				</section>
 
 				<section>
 					<h2>Using <code>onPrepare</code></h2>
-<pre><code data-trim> onPrepare: function() {
+					<pre><code data-trim> onPrepare: function() {
 
 },
 </code></pre>
-<p>Example: Export xml results of your Automated Suites</p>
-<pre><code data-trim>(sudo) npm install jasmine-reporters</code></pre>
-<pre><code data-trim>onPrepare: function() {
+					<p>Example: Export xml results of your Automated Suites</p>
+					<pre><code data-trim>(sudo) npm install jasmine-reporters
+					</code></pre>
+					<pre><code data-trim>onPrepare: function() {
 
     require ('jasmine-reporters');
     jasmine.getEnv().addReporter(
@@ -296,14 +300,12 @@ var PageObject = require('./HomePage');
 
   },
 </code></pre>
-
 				</section>
 
 				<section>
 					<h2>Using <code>params</code></h2>
-<p>Parameters will be passed to the Protractor instance to be accessed from your test</p>
-<p></p>
-<pre><code data-trim>  params: {
+						<p>Parameters will be passed to the Protractor instance to be accessed from your test</p>
+							<pre><code data-trim>  params: {
     login: {
       user: 'Jane',
       password: '1234'
@@ -314,7 +316,7 @@ var PageObject = require('./HomePage');
 
 				<section>
 					<h2>Using <code>jasmineNodeOpts</code></h2>
-<pre><code data-trim>  jasmineNodeOpts: {
+						<pre><code data-trim>  jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
     isVerbose: true,
