@@ -38,18 +38,63 @@
 			<div class="slides">
 
 				<section>
-					<h1 style="margin: 50px 0 .3em">Protractor</h1>
+					<h1 style="margin: 50px 0 .3em">Protractor for AngularJS</h1>
 					<h3 style="font-size:1.2em">Writing end-to-end test has never been so fun</h3>
 				</section>
 
 				<section>
-					<h2>What is it about?</h2>
+					<h2>Why testing is so important?</h2>
+					<blockquote style="font-size: 1.5em;line-height:1.2em">
+						Testing is about gaining confidence that your code does what you think your code should do
+					</blockquote>
+					<p><a href="https://github.com/juliemr">@juliemr</a></p>
+				</section>
+
+				<section>
+					<h2>Whats the ideia around E2E testing?</h2>
 					<ul>
-						<li>End-to-End test for AngularJS != Unit test (Karma)</li>
-						<li>Built on top of <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">WebDriverJS</a> (Selenium server)</li>
-						<li><a href="http://jasmine.github.io/2.0/introduction.html">Jasmine</a> test syntax</li>
-						<li>Maintained by <a href="https://github.com/juliemr">@juliemr</a> on <a href="https://github.com/angular/protractor">Github</a></li>
+						<li>How would the users see your application?</li>
+						<li>Does my backend is comunicating with my frontend?</li>
+						<li>Can I release this code?</li>
+						<li>It's <strong>NOT</strong> a replacement for Unit Testing!</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>The dark side of E2E testing</h2>
+					<ul>
+						<li>It needs a spefic environment running</li>
+						<li>It's 'hard' to write</li>
+						<li>It's difficult to debug</li>
+						<li>It's hard to keep the tests up to date</li>
+					</ul>
+				</section>
+
+				<section>
+					<a href="https://github.com/angular/protractor/">
+						<img src="img/protractor-on-github.png" width="900" alt="">
+					</a>
+				</section>
+
+				<section>
+					<h2>Protractor is built on top of <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">WebDriverJS</a></h2>
+
+					<p style="text-align: center">
+						<strong>Test Process</strong> (NodeJS, Java, etc)
+					</p>
+					<p style="text-align: center">
+						|
+					</p>
+					<p style="text-align: center">
+						<strong>Webdriver</strong> (aka selenium)
+					</p>
+					<p style="text-align: center">
+						|
+					</p>
+					<p style="text-align: center">
+						<strong>Your AngularJS App</strong>
+					</p>
+					
 				</section>
 				
 				<section>
@@ -84,8 +129,27 @@
 				</section>
 
 				<section>
-					<h2>Writing tests</h2>
-					<p>Protractor exposes several global variables:</p>
+					<h2 style="font-size:3em;margin-top: 50px">Writing tests</h2>
+				</section>
+
+				<section>
+					<h2>Write your tests using <a href="http://jasmine.github.io/2.0/introduction.html">Jasmine</a> and WebdriverJS</h2>
+<pre><code>describe('by model', function() {
+	it('should find an element by text input model', function() {
+	  var username = element(by.model('username'));
+	  var name = element(by.binding('username'));
+
+	  username.clear();
+	  expect(name.getText()).toEqual('');
+
+	  username.sendKeys('Jane Doe');
+	  expect(name.getText()).toEqual('Jane Doe');
+	});
+});</code></pre>
+				</section>
+
+				<section>
+					<h2>Protractor global variables</h2>
 					<ul>
 						<li><code>browser</code>: <code>browser.get()</code></li>
 						<li><code>element</code> and <code>by</code>: <code>element(by.model('yourName'))</code></li>
@@ -95,7 +159,7 @@
 
 				<section>
 					<h2>Basic example</h2>
-					<pre><code data-trim="" style="font-size:20px;line-height:1em">describe('angularjs homepage', function() {
+					<pre><code style="font-size:20px;line-height:1em">describe('angularjs homepage', function() {
   it('should greet the named user', function() {
     browser.get('http://www.angularjs.org');
 
@@ -157,7 +221,15 @@
 				</section>
 
 				<section>
-					<h2>Protractor API</h2>
+					<h2>Searching elements best practices</h2>
+					<ul>
+						<li>Take advantage of AngularJS attributes using <code>by.model</code>, <code>by.repeater</code>, etc</li>
+						<li>Avoid using potential CSS attributes, mainly IDs and Classes.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2 style="font-size: 1.8em">Find out more in Protractor API</h2>
 					<ul>
 						<li><code>by.select()</code></li>
 						<li><code>by.partialButtonText()</code></li>
@@ -192,16 +264,12 @@
 				</section>
 
 				<section>
-					<h2>Examples</h2>
-				</section>
-
-				<section>
-					<h2>Searching elements best practices</h2>
-					<ul>
-						<li>Take advantage of AngularJS attributes using <code>by.model</code>, <code>by.repeater</code>, etc</li>
-						<li>Avoid using potential CSS attributes, mainly IDs and Classes.</li>
-					</ul>
-					
+					<h2>Debbuging using elementexplorer</h2>
+					<ol>
+						<li>Run:<br> <code style="font-size: 16px">/usr/local/lib/node_modules/protractor/bin/<strong>elementexplorer.js</strong> http://angularjs.org</code></li>
+						<li>Press 'tab'</li>
+						<li>Try to find any element()</li>
+					</ol>
 				</section>
 
 				<section>
@@ -316,41 +384,44 @@ module.exports.FileName = FileName;
 
 				<section>
 					<h2>Using <code>jasmineNodeOpts</code></h2>
-						<pre><code data-trim>  jasmineNodeOpts: {
+						<pre style="margin-bottom: 30px"><code data-trim>  jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
     isVerbose: true,
     includeStackTrace: true
   }
-</pre></code></br>
-				<ul>
-					<li>
+</pre></code>
+					<p>
 						<a href = "https://github.com/juliemr/minijasminenode">More on jasmineNodeOpts
 						</a>
-					</li>
-				</ul>
+					</p>
 				</section>
 
 
 				<section>
 					<h2>Final thoughts</h2>
 					<ul>
-						<li>E2E test != Unit test</li>
+						<li>E2E test is a complement to Unit tests</li>
 						<li>Avoid using CSS attributes</li>
 						<li>Write your tests with scalability in mind</li>
-						<li>Finally, have fun testing with Protractor</li>
+						<li>Just have fun testing with Protractor</li>
 					</ul>
 				</section>
 
 				<section>
-					<a href="https://github.com/angular/protractor/">
-						<img src="img/protractor-on-github.png" width="900" alt="">
-					</a>
+					<h2>Learning Resources</h2>
+					<ul>
+						<li>Github project</li>
+						<li>ngConf presentation</li>
+						<li>...</li>
+					</ul>
 				</section>
 
 				<section>
 					<h3 style="font-size:3em;margin-top:30px">Thank you :)</h3>
-					<a href="https://github.com/ramonvictor">@ramonvictor</a>
+					<p>
+						<a href="https://github.com/ramonvictor">@ramonvictor</a> and <a href="https://github.com/rafaelbattesti">@rafaelbattesti</a>
+					</p>
 				</section>
 
 			</div>
