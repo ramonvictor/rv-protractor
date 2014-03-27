@@ -1,11 +1,11 @@
 Protractor: documentação em português
 ==========
 
-Esse projeto destina-se a fazer uma tradução livre da documentação do Protractor com o objetivo de disseminar essa poderosa ferramenta de End-to-End testes na comunidade brasileira de Desenvolvedores Front-End e Testadores.
+Tradução livre da documentação do Protractor com o objetivo de disseminar essa poderosa ferramenta de End-to-End testes na comunidade brasileira de Desenvolvedores Front-End e Testadores.
 
 Sobre o Protractor
-
 -----------------------
+
 Protractor is an end to end test framework for [AngularJS](http://angularjs.org/) applications built on top of [WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs). Protractor runs tests against your application running in a real browser, interacting with it as a user would.
 
 Protractor can be run as a standalone binary, or included into your tests as a library. Use [Protractor as a library](https://github.com/angular/protractor/blob/master/docs/library-only.md) if you would like to manage WebDriver and your test setup yourself.
