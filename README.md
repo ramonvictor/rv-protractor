@@ -1,6 +1,11 @@
-Protractor [![Build Status](https://travis-ci.org/angular/protractor.png?branch=master)](https://travis-ci.org/angular/protractor)
+Protractor: documentação em português
 ==========
 
+Esse projeto destina-se a fazer uma tradução livre da documentação do Protractor com o objetivo de disseminar essa poderosa ferramenta de End-to-End testes na comunidade brasileira de Desenvolvedores Front-End e Testadores.
+
+Sobre o Protractor
+
+-----------------------
 Protractor is an end to end test framework for [AngularJS](http://angularjs.org/) applications built on top of [WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs). Protractor runs tests against your application running in a real browser, interacting with it as a user would.
 
 Protractor can be run as a standalone binary, or included into your tests as a library. Use [Protractor as a library](https://github.com/angular/protractor/blob/master/docs/library-only.md) if you would like to manage WebDriver and your test setup yourself.
@@ -112,3 +117,9 @@ Note the [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/jav
 
 For alternate ways to download and start the selenium standalone, see
 [the webdriver docs](http://docs.seleniumhq.org/docs/03_webdriver.jsp#running-standalone-selenium-server-for-use-with-remotedrivers).
+
+Time de colaboradores
+---------------------------------------------------
+
+- [Ramon Victor](https://github.com/ramonvictor)
+- [Rafael Battesti](https://github.com/rafaelbattesti)
