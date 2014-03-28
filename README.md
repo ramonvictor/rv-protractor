@@ -8,9 +8,9 @@ Sobre o Protractor
 
 Protractor é um framework de end-to-end testes para aplicações [AngularJS](http://angularjs.org/) construído a partir do [WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs). Protractor executa testes na sua aplicação usando o próprio navegador, interagindo com ele assim como o usuário faria.
 
-Protractor pode ser executado como um binário independente ou incluído dentro dos seus testes como uma biblioteca. Use [Protractor como biblioteca](https://github.com/ramonvictor/protractor/blob/master/docs/library-only.md) se deseja gerenciar o WebDriver e a configuração dos seus próprios testes.
+Protractor pode ser executado como um binário independente ou incluído dentro dos seus testes como uma biblioteca. Use [Protractor como biblioteca](https://github.com/ramonvictor/protractor/blob/master/docs/pt-br/library-only.md) se deseja gerenciar o WebDriver e a configuração dos seus próprios testes.
 
-Para maiores informações, [leia o docs](https://github.com/ramonvictor/protractor/tree/master/docs/getting-started.md) ou siga para as [perguntas frequentes](https://github.com/ramonvictor/protractor/blob/master/docs/faq.md).
+Para maiores informações, [leia o docs](https://github.com/ramonvictor/protractor/tree/master/docs/pt-br/getting-started.md) ou siga para as [perguntas frequentes](https://github.com/ramonvictor/protractor/blob/master/docs/pt-br/faq.md).
 
 
 To run the sample tests
@@ -36,7 +36,7 @@ The Protractor runner is a binary which accepts a config file. Install protracto
     # Run the line below to see command line options
     protractor
 
-You will need a *configuration file* containing setup info and *test files* containing the actual test scripts. The config file specifies how the runner should start webdriver, where your test files are, and global setup options. The test files use Jasmine framework by default ([read about using mocha instead](https://github.com/angular/protractor/tree/master/docs/using-mocha.md)).
+You will need a *configuration file* containing setup info and *test files* containing the actual test scripts. The config file specifies how the runner should start webdriver, where your test files are, and global setup options. The test files use Jasmine framework by default ([read about using mocha instead](https://github.com/angular/protractor/tree/master/docs/pt-br/using-mocha.md)).
 
 Create a configuration file - an example with detailed comments is shown in `node_modules/protractor/referenceConf.js`. Edit the configuration file to point to your test files.
 
@@ -53,7 +53,7 @@ The configuration file must specify a way to connect to webdriver. This can be
  *   `seleniumServerJar`: The location of the selenium standalone .jar file on your machine. Protractor will use this to start up the selenium server.
  *   `sauceUser` and `sauceKey`: The username and key for a [SauceLabs](http://www.saucelabs.com) account. Protractor will use this to run tests on SauceLabs.
 
-The runner exposes global variables `browser`, `by` and `element`. Check out [getting started docs](https://github.com/angular/protractor/blob/master/docs/getting-started.md) to learn how to write a test.
+The runner exposes global variables `browser`, `by` and `element`. Check out [getting started docs](https://github.com/ramonvictor/protractor/blob/master/docs/pt-br/getting-started.md) to learn how to write a test.
 
 ```javascript
 // myTest.js
