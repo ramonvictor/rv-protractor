@@ -13,21 +13,22 @@ Protractor pode ser executado como um binário independente ou incluído dentro 
 Para maiores informações, [leia o docs](https://github.com/ramonvictor/protractor/tree/master/docs/pt-br/getting-started.md) ou siga para as [perguntas frequentes](https://github.com/ramonvictor/protractor/blob/master/docs/pt-br/faq.md).
 
 
-To run the sample tests
+Para rodar os arquivos de teste
 -----------------------
 
-Install protractor with.
+Instale o protractor com:
 
     npm install -g protractor
 
-Start up a selenium server (See the appendix below for help with this). By default, the tests expect the selenium server to be running at `http://localhost:4444/wd/hub`.
+Inicialize um servidor selenium (veja o apêndice abaixo para melhor entendimento). Por padrão, os testes esperam que o servidor selenium estejam rodando no
+`http://localhost:4444/wd/hub`.
 
-The node module's example folder contains a simple test suite which runs against angularjs.org. Run with: 
+A pasta de exemplos de node modules contém uma simples suite de teste que executa sobre o angularjs.org. Rode com:
 
     protractor example/conf.js
 
 
-Using the Protractor runner
+Usando o Protractor runner
 ---------------------------
 
 The Protractor runner is a binary which accepts a config file. Install protractor with
