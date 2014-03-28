@@ -6,11 +6,11 @@ Tradução livre da documentação do Protractor com o objetivo de disseminar es
 Sobre o Protractor
 -----------------------
 
-Protractor is an end to end test framework for [AngularJS](http://angularjs.org/) applications built on top of [WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs). Protractor runs tests against your application running in a real browser, interacting with it as a user would.
+Protractor é um framework de end-to-end testes para aplicações [AngularJS](http://angularjs.org/) construído a partir do [WebDriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs). Protractor executa testes na sua aplicação o próprio navegador, interagindo com ele assim como o usuário fária.
 
-Protractor can be run as a standalone binary, or included into your tests as a library. Use [Protractor as a library](https://github.com/angular/protractor/blob/master/docs/library-only.md) if you would like to manage WebDriver and your test setup yourself.
+Protractor pode ser executado como um binário independente ou incluído dentro dos seus testes como uma biblioteca. Use [Protractor como biblioteca](https://github.com/ramonvictor/protractor/blob/master/docs/library-only.md) se deseja gerenciar o WebDriver e a configuração dos seus próprios testes.
 
-For more information, [read the docs](https://github.com/angular/protractor/tree/master/docs/getting-started.md), or head over to the [FAQ](https://github.com/angular/protractor/blob/master/docs/faq.md).
+Para maiores informações, [leia o docs](https://github.com/ramonvictor/protractor/tree/master/docs/getting-started.md) ou siga para as [perguntas frequentes](https://github.com/ramonvictor/protractor/blob/master/docs/faq.md).
 
 
 To run the sample tests
