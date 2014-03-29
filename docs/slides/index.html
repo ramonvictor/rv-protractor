@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		
-		<title>Protractor: writing end-to-end test has never been so fun</title>
+		<title>Protractor for AngularJS: writing end-to-end test has never been so fun</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -44,7 +44,7 @@
 
 				<section>
 					<h2>Why testing is so important?</h2>
-					<blockquote style="font-size: 1.5em;line-height:1.2em">
+					<blockquote style="line-height:1.2em">
 						Testing is about gaining confidence that your code does what you think your code should do
 					</blockquote>
 					<p><a href="https://github.com/juliemr">@juliemr</a></p>
@@ -179,7 +179,11 @@
 
 				<section>
 					<h2 style="font-size:1.5em;"><code>element()</code> vs <code>element.all()</code></h2>
-					<!-- TODO -->
+					<p>Single element</p>
+					<pre class="mb-30"><code>element( by.binding('appName') );</code></pre>
+					<p>Collection of elements</p>
+					<pre><code>// clicks the 3th element
+element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
@@ -266,9 +270,11 @@
 				<section>
 					<h2>Debbuging using elementexplorer</h2>
 					<ol>
+						<li>Start your webdriver server:<br>
+							<code>webdriver-manager start</code>
+						</li>
 						<li>Run:<br> <code style="font-size: 16px">/usr/local/lib/node_modules/protractor/bin/<strong>elementexplorer.js</strong> http://angularjs.org</code></li>
-						<li>Press 'tab'</li>
-						<li>Try to find any element()</li>
+						<li>Press 'tab' and play with element()</li>
 					</ol>
 				</section>
 
@@ -347,57 +353,120 @@ module.exports.FileName = FileName;
 
 				<section>
 					<h2>Enable <code>multiCapabilities</code></h2>
-					<pre><code data-trim>multiCapabilities: [{
-'browserName': 'chrome'
-}, {
-'browserName: 'firefox'
-}],
-</code></pre></br>
-  				<strong>Enables parallel execution in multiple browsers</strong></br>
+					<pre><code>exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  multiCapabilities: [
+	{
+	  'browserName' : 'chrome'
+	}, 
+	{
+	  'browserName' : 'firefox'
+	}
+  ],
+
+  specs: ['example-spec.js'],
+
+  jasmineNodeOpts: {
+    showColors: true
+  }
+};</code></pre>
 				</section>
 
 				<section>
-					<h2>Using <code>onPrepare</code></h2>
-					<pre><code data-trim> onPrepare: function() {
+					<section>
+						<h2>Using <code>onPrepare</code></h2>
+					<pre><code data-trim>exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
 
-},
-</code></pre>
-					<p>Example: Export xml results of your Automated Suites</p>
-					<pre><code data-trim>(sudo) npm install jasmine-reporters
-					</code></pre>
-					<pre><code data-trim>onPrepare: function() {
+  capabilities: {
+    'browserName': 'chrome'
+  },
 
+  onPrepare: function() {
+     browser.driver.manage().window().setSize(1600, 800);
+  },
+ 
+  jasmineNodeOpts: {
+    showColors: true
+  }
+};</code></pre>
+					</section>
+					<section>
+						<h3>Export xml results of your Automated Suites</h3>
+						<pre><code data-trim>(sudo) npm install jasmine-reporters</code></pre>
+						<pre><code data-trim>//config.js
+exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  capabilities: { 'browserName': 'chrome' },
+
+  onPrepare: function() {
     require ('jasmine-reporters');
     jasmine.getEnv().addReporter(
-      new jasmine.JUnitXmlReporter('./', true, true));
-
+      new jasmine.JUnitXmlReporter('./', true, true)
+    );
   },
-</code></pre>
+
+  jasmineNodeOpts: {
+    showColors: true
+  }
+};</code></pre>
+					</section>
+					
 				</section>
 
 				<section>
 					<h2>Using <code>params</code></h2>
-						<p>Parameters will be passed to the Protractor instance to be accessed from your test</p>
-							<pre><code data-trim>  params: {
-    login: {
-      user: 'Jane',
-      password: '1234'
-    }
+					<p>Your config.js</p>
+					<pre><code data-trim>exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  capabilities: { 'browserName': 'chrome' },
+
+  params: {
+    timestamp : Date.now()
   },
-</code></pre>
+
+  onPrepare: function() {
+     browser.driver.manage().window().setSize(1600, 800);
+  },
+ 
+  jasmineNodeOpts: { showColors: true }
+};</code></pre>
+				</section>
+
+				<section>
+					<h2>Using <code>params</code></h2>
+					<p>Your test</p>
+					<pre><code data-trim>describe('angular homepage', function() {
+  
+  it('should add my name', function() {
+    element( by.model('yourName') ).sendKeys('Ramon Victor ' + browser.params.timestamp);
+    expect( element(by.binding('yourName') ).getText() )
+    	.toEqual('Ramon Victor ' + browser.params.timestamp);
+  });   
+
+});</code></pre>
 				</section>
 
 				<section>
 					<h2>Using <code>jasmineNodeOpts</code></h2>
-						<pre style="margin-bottom: 30px"><code data-trim>  jasmineNodeOpts: {
+					<pre class="mb-30"><code data-trim>exports.config = {
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  capabilities: { 'browserName': 'chrome' },
+
+  jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
     isVerbose: true,
     includeStackTrace: true
   }
-</pre></code>
+};</code></pre>
+						
 					<p>
-						<a href = "https://github.com/juliemr/minijasminenode">More on jasmineNodeOpts
+						<a href = "https://github.com/angular/protractor/blob/master/referenceConf.js">See full list of available options on config.js
 						</a>
 					</p>
 				</section>
@@ -416,8 +485,8 @@ module.exports.FileName = FileName;
 				<section>
 					<h2>Learning Resources</h2>
 					<ul>
-						<li>Github project</li>
-						<li>ngConf presentation</li>
+						<li><a href="https://github.com/angular/protractor/blob/master/docs/getting-started.md">Github project</a></li>
+						<li><a href="http://www.youtube.com/watch?v=aQipuiTcn3U">ng-conf 2014 presentation</a></li>
 						<li>...</li>
 					</ul>
 				</section>

@@ -147,6 +147,10 @@ body {
   /*text-align: left;*/
 }
 
+.reveal .align-right{
+  text-align: right;
+}
+
 .reveal .c-red{
   color: #b7110e;
 }
@@ -169,4 +173,9 @@ body {
 
 .reveal .mb-30{
   margin-bottom: 30px;
+}
+
+.reveal blockquote{
+  box-shadow: none;
+  font-size: 1.7em;
 }
