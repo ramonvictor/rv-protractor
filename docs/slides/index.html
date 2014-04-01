@@ -162,7 +162,8 @@
 
 				<section>
 					<h2>Basic example</h2>
-					<pre><code style="font-size:20px;line-height:1em">describe('angularjs homepage', function() {
+					<pre><code style="font-size:20px;line-height:1em">// Let's run it?
+describe('angularjs homepage', function() {
   it('should greet the named user', function() {
     browser.get('http://www.angularjs.org');
 
@@ -283,7 +284,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 
 				<section>
 					<h2 style="font-size:3em;margin: 50px 0 30px;">Maintanable Tests</h2>
-					<h3>Best practices to organize or tests</h3>
+					<h3>Best practices to organize your tests</h3>
 				</section>
 
 				<section>
@@ -347,30 +348,30 @@ describe('HomePage Tests', function(){
 				</section>
 
 				<section>
-					<h2>Tests</h2>
-				
+					<h2 style="font-size:3em;margin-top:100px">Hands On!</h2>
 				</section>
 
 				<section>
-					<h2>Separate your tests in various test suites</h2>
+					<h2>Go further!</h2>
+					<strong>Separate your tests in various test suites</strong>
 <pre><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
-
   capabilities: { 'browserName': 'chrome' },
 
   suites: {
     homepage: 'tests/e2e/homepage/**/*Spec.js',
-    search: ['tests/e2e/contact_search/**/*Spec.js', 'tests/e2e/venue_search/**/*Spec.js']
+    search: ['tests/e2e/contact_search/**/*Spec.js']
   },
 
   jasmineNodeOpts: { showColors: true }
 };
 </code></pre>
-				<strong>running specific suite of tests</strong>
+				<strong>Running specific suite of tests</strong>
 				<pre><code>protractor protractor.conf.js --suite homepage
 				</code></pre>
 				</section>
-
+				
+				
 
 				<section>
 					<h2 style="font-size:3em;margin-top:30px">Other config.js advanced tips</h2>
