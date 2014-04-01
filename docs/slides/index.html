@@ -289,6 +289,25 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
+					<h2>Tests directory structure</h2>
+<pre><code style="font-size:1.1em;line-height:130%">projectfolder/
+  |-- css/
+  |-- js/
+  |-- img/
+  |-- tests/    
+    |-- unit/           
+    |-- e2e/  
+    |    |-- homepage/
+    |    |     |-- homepage.po.js
+    |    |     |-- *_spec.js
+    |    |-- profile/
+    |    |     |-- profile.po.js
+    |    |     |-- *_spec.js
+    |    |-- config.js
+</code></pre>
+				</section>
+
+				<section>
 					<h2>Page Objects</h2>
 					<pre><code data-trim>var AngularHomepage = function() {
   this.nameInput = element(by.model('yourName'));
@@ -307,18 +326,20 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				<section>
 					<h2>Node.JS exports and require</h2>
 					<strong>Your Page Object file</strong>
-					<pre><code>...
-  this.setName = function(name) {
-    this.nameInput.sendKeys(name);
-  };
+					<pre><code>var AngularHomepage = function() {
+  this.nameInput = element(by.model('yourName'));
+  this.greeting = element(by.binding('yourName'));
+  // ...
 };
-module.exports.FileName = FileName;
+module.exports.AngularHomepage = AngularHomepage;
 </code></pre>
 					<strong>Your Test file</strong>
-					<pre><code>var PageObject = require('./HomePage');
-	describe('HomePage Tests', function(){
-		var H = new PageObject.HomePage();
-		...
+<pre><code>var PageObject = require('./homepage.po');
+describe('HomePage Tests', function(){
+	var homePage = new PageObject.AngularHomepage();
+	homePage.nameInput.sendKeys("Rafael");
+	//...
+});
 </code></pre>
 				</section>
 
@@ -329,7 +350,7 @@ module.exports.FileName = FileName;
 
 				<section>
 					<h2>Separate your tests in various test suites</h2>
-					<pre><code data-trim>exports.config = {
+<pre><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
   capabilities: { 'browserName': 'chrome' },
@@ -346,6 +367,7 @@ module.exports.FileName = FileName;
 				<pre><code>protractor protractor.conf.js --suite homepage
 				</code></pre>
 				</section>
+
 
 				<section>
 					<h2 style="font-size:3em;margin-top:30px">Other config.js advanced tips</h2>
@@ -469,6 +491,11 @@ exports.config = {
 						<a href = "https://github.com/angular/protractor/blob/master/referenceConf.js">See full list of available options on config.js
 						</a>
 					</p>
+				</section>
+
+				<section>
+					<h2>Warning: Localhost != Online server</h2>
+					<p>Take advantage of <code>.then()</code> promises to guarantee the execution sequence of your tests.</p>
 				</section>
 
 
