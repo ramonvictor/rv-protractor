@@ -1,7 +1,7 @@
 Protractor: guia prático de uso
 ==========
 
-Em desenvolvimento
+Em desenvolvimento!
 
 Sumário
 ---------------------------------------------------
