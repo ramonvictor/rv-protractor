@@ -289,7 +289,11 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 
 				<section>
 					<h2>The big picture</h2>
-					<!-- Graphic -->
+					<ul>
+						<li>Page Objects</li>
+						<li>Exports and Require</li>
+						<li>Test specs</li>
+					</ul>
 				</section>
 
 				<section>
@@ -495,8 +499,13 @@ exports.config = {
 				</section>
 
 				<section>
-					<h2 style="margin-top:50px;line-height:1.3em">Warning:<br>Localhost != Online server</h2>
-					<p style="line-height:1.6em">Take advantage of <code>.then()</code> promises to guarantee the sequence of your tests execution.</p>
+					<h2 style="margin-top:70px;font-size:4em">Bonus</h2>
+				</section>
+
+				<section>
+					<h2 style="margin-bottom:.3em"><a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a></h2>
+					<p style="font-size:.7em;margin-bottom:1.4em">A gulp plugin to help you avoiding broken Protractor tests due to not found element() selectors.</p>
+					<img style="border: none" src="https://raw.githubusercontent.com/ramonvictor/gulp-protractor-qa/master/assets/gulp-protractor-qa.gif" alt="Video screen demo of gulp-protractor-qa in action!">
 				</section>
 
 
