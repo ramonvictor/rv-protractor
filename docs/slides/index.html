@@ -352,10 +352,6 @@ describe('HomePage Tests', function(){
 				</section>
 
 				<section>
-					<h2 style="font-size:3em;margin-top:100px">Hands On!</h2>
-				</section>
-
-				<section>
 					<h2 style="font-size:3em;margin-top:100px">Go further!</h2>
 				</section>
 
@@ -496,6 +492,52 @@ exports.config = {
 						<a href = "https://github.com/angular/protractor/blob/master/referenceConf.js">See full list of available options on config.js
 						</a>
 					</p>
+				</section>
+
+				<section>
+					<h2 style="margin-top: 30px;font-size:3em">"But, I want to use Protractor in a non AngularJS app"</h2>
+					<p class="fragment" style="font-size:2em">Sorry, you can't! :(</p>
+				</section>
+
+				<section>
+					<h2>Just kidding, of course,<br> you can! :)</h2>
+					<p style="font-size:.8em;margin-bottom:50px;">You just need to access the webdriver instance by using <code>browser.driver</code>:</p>
+					<pre class="mb-30"><code>
+browser.driver.find(By.css('[data-ptor="submit-btn"]'));
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>It can be even more elegant</h2>
+					<h3 style="font-size:1em">In your config.js</h3>
+<pre class="mb-30"><code>onPrepare: function(){
+   global.dvr = browser.driver;
+}</code></pre>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre><code>dvr.find(By.css('[data-ptor="submit-btn"]'));</code></pre>
+				</section>
+
+				<section>
+					<h2>Protractor waits Angular to finish its work</h2>
+					<p>But, you can tell it not to be that smart about your non Angular app</p>
+<pre class="mb-30"><code style="font-size:1.3em;line-height:130%">beforeEach(function() {
+   return browser.ignoreSynchronization = true;
+});</code></pre>
+				</section>
+
+				<section>
+					<h2>Let's make it more semantic?</h2>
+					<h3 style="font-size:1em">In your config.js</h3>
+<pre class="mb-30"><code>onPrepare: function(){
+   global.isAngularSite = function(flag){
+      browser.ignoreSynchronization = !flag;
+   };
+}</code></pre>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>beforeEach(function() {
+   isAngularSite(false); // isAngularSite(true), if it's an Angular app!
+});</code></pre>
+					<p style="font-size:.6em;text-align:right;">Reference: <a href="http://ng-learn.org/2014/02/Protractor_Testing_With_Angular_And_Non_Angular_Sites/">Protractor - Testing Angular and Non Angular Sites</a></p>
 				</section>
 
 				<section>
