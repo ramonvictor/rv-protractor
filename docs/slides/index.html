@@ -217,8 +217,8 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 					<h3 style="font-size:1em">In your test</h3>
 					<pre class="mb-30"><code>element( by.repeater('user in users').row(0).column('name') );</code></pre>
 					<h3 style="font-size:1em">In your application</h3>
-					<pre><code>&lt;ul ng-model="user in users">
-  &lt;li>
+					<pre><code>&lt;ul>
+  &lt;li ng-repeat="user in users">
       &lt;span>{{user.name}}&lt;/span>
   &lt;/li>
 &lt;/ul></code></pre>
