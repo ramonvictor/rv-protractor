@@ -54,9 +54,9 @@
 				</section>
 
 				<section>
-					<h2>Whats the ideia around E2E testing?</h2>
+					<h2>Whats the ideia behind E2E testing?</h2>
 					<ul>
-						<li>How would the users see your application?</li>
+						<li>How would the users see my application?</li>
 						<li>Does my backend is comunicating with my frontend?</li>
 						<li>Can I release this code?</li>
 						<li>It's <strong>NOT</strong> a replacement for Unit Testing!</li>
@@ -67,7 +67,7 @@
 					<h2>The dark side of E2E testing</h2>
 					<ul>
 						<li>It needs a spefic environment running</li>
-						<li>It's 'hard' to write</li>
+						<li>It's hard to write</li>
 						<li>It's difficult to debug</li>
 						<li>It's hard to keep the tests up to date</li>
 					</ul>
@@ -213,7 +213,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 					<h3 style="font-size:1em">In your test</h3>
 					<pre class="mb-30"><code>element( by.repeater('user in users').row(0).column('name') );</code></pre>
 					<h3 style="font-size:1em">In your application</h3>
-					<pre><code>&lt;ul ng-model="user in users">
+					<pre><code>&lt;ul ng-repeater="user in users">
   &lt;li>
       &lt;span>{{user.name}}&lt;/span>
   &lt;/li>
@@ -548,6 +548,11 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 					<h2 style="margin-bottom:.3em"><a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a></h2>
 					<p style="font-size:.6em;margin-bottom:1.4em">It warns you on the fly whether all element() selectors could be found or not within your AngularJS view files.</p>
 					<img style="border: none" src="https://raw.githubusercontent.com/ramonvictor/gulp-protractor-qa/master/assets/gulp-protractor-qa.gif" alt="Video screen demo of gulp-protractor-qa in action!">
+				</section>
+				
+				<section>
+					<h2>How to use <a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a>?</h2>	
+					<iframe width="740" height="416" src="//www.youtube.com/embed/mhJDhIvaKJo" frameborder="0" allowfullscreen></iframe>
 				</section>
 
 
