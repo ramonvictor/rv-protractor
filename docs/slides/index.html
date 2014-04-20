@@ -40,7 +40,7 @@
 				<section>
 					<h1 style="margin: 50px 0 .3em">Protractor for AngularJS</h1>
 					<h3 style="font-size:1.2em;margin-bottom:2em">Writing end-to-end test has never been so fun</h3>
-					<p style="font-size:.8em">
+					<p>
 						<a href="https://github.com/ramonvictor">@ramonvictor</a>
 					</p>
 				</section>
@@ -102,13 +102,12 @@
 				
 				<section>
 					<h2>Install</h2>
-					<ol>
+					<ol style="font-size:1.2em;">
 						<li>
 							Download <a href="http://nodejs.org/download/">Noje.JS</a>
 						</li>
-						<li><code>(sudo) npm install -g protractor</code></li>
-						<li><code>(sudo) webdriver-manager update</code></li>
-						<li><code>webdriver-manager start</code></li>
+						<li><code>sudo npm install -g protractor</code></li>
+						<li><code>sudo webdriver-manager update</code></li>
 					</ol>
 
 				</section>
@@ -132,22 +131,18 @@
 				</section>
 
 				<section>
-					<h2 style="font-size:3em;margin-top: 50px">Writing tests</h2>
-				</section>
-
-				<section>
 					<h2>Write your tests using <a href="http://jasmine.github.io/2.0/introduction.html">Jasmine</a> and WebdriverJS</h2>
 <pre><code>describe('by model', function() {
-	it('should find an element by text input model', function() {
-	  var username = element(by.model('username'));
-	  var name = element(by.binding('username'));
-
-	  username.clear();
-	  expect(name.getText()).toEqual('');
-
-	  username.sendKeys('Jane Doe');
-	  expect(name.getText()).toEqual('Jane Doe');
-	});
+   it('should find an element by text input model', function() {
+     var username = element(by.model('username'));
+     var name = element(by.binding('username'));
+   
+     username.clear();
+     expect(name.getText()).toEqual('');
+   
+     username.sendKeys('Jane Doe');
+     expect(name.getText()).toEqual('Jane Doe');
+   });
 });</code></pre>
 				</section>
 
@@ -162,7 +157,7 @@
 
 				<section>
 					<h2>Basic example</h2>
-					<pre><code style="font-size:20px;line-height:1em">// Let's run it?
+					<pre><code style="font-size:20px;line-height:1em">// example-spec.js
 describe('angularjs homepage', function() {
   it('should greet the named user', function() {
     browser.get('http://www.angularjs.org');
@@ -175,6 +170,15 @@ describe('angularjs homepage', function() {
   });
 });
 </code></pre>
+				</section>
+
+				<section>
+					<h2>Let's run it?</h2>
+					<p>First things first, open the terminal and start the webdriver server:
+					</p>
+					<pre style="margin-bottom:40px"><code>webdriver-manager start</code></pre>
+					<p>After that, you can run Protractor in another terminal by typing:</p>
+					<pre><code>protractor test/e2e/config.js // this is the relative path to your config.js file</code></pre>
 				</section>
 
 				<section>
@@ -213,8 +217,8 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 					<h3 style="font-size:1em">In your test</h3>
 					<pre class="mb-30"><code>element( by.repeater('user in users').row(0).column('name') );</code></pre>
 					<h3 style="font-size:1em">In your application</h3>
-					<pre><code>&lt;ul ng-repeater="user in users">
-  &lt;li>
+					<pre><code>&lt;ul>
+  &lt;li ng-repeat="user in users">
       &lt;span>{{user.name}}&lt;/span>
   &lt;/li>
 &lt;/ul></code></pre>
