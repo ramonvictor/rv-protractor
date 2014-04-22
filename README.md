@@ -1,8 +1,18 @@
-A step-by-step guide presentation on Protractor end-to-end testing
-==========
+A step-by-step guide presentation on Protractor end-to-end testing.
 
-Slides available online:
-[Protractor for AngularJS: writing end-to-end test has never been so fun](http://ramonvictor.github.io/protractor/slides/)
+<table>
+<tr>
+<td>
+<img src="https://raw.githubusercontent.com/ramonvictor/protractor/master/assets/protractor-logo.png" alt="Protractor Logo" />
+</td>
+
+<td>
+<h3>Slides available online: <br>
+<a href="http://ramonvictor.github.io/protractor/slides/">Protractor for AngularJS: writing end-to-end test has never been so fun</a>
+</h3>
+</td>
+</tr>
+</table>
 
 > If you are looking for the official documentation, you can find it here: [https://github.com/angular/protractor/](https://github.com/angular/protractor/).
 
