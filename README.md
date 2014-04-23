@@ -3,7 +3,7 @@ A step-by-step guide presentation on Protractor end-to-end testing.
 <table>
 <tr>
 <td>
-<img src="https://raw.githubusercontent.com/ramonvictor/protractor/master/assets/protractor-logo.png" alt="Protractor Logo" />
+<a href="http://ramonvictor.github.io/protractor/slides/"><img src="https://raw.githubusercontent.com/ramonvictor/protractor/master/assets/protractor-logo.png" alt="Protractor Logo" /></a>
 </td>
 
 <td>
