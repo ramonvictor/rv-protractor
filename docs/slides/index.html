@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		
-		<title>Protractor for AngularJS: writing end-to-end test has never been so fun</title>
+		<title>Protractor for AngularJS: writing end-to-end tests has never been so fun</title>
 
 		<meta name="description" content="A step-by-step presentaion on Protractor End-to-End Testing for AngularJS">
 		<meta name="author" content="Ramon Victor | @ramonvictor">
@@ -39,14 +39,14 @@
 
 				<section>
 					<h1 style="margin: 50px 0 .3em">Protractor for AngularJS</h1>
-					<h3 style="font-size:1.2em;margin-bottom:2em">Writing end-to-end test has never been so fun</h3>
+					<h3 style="font-size:1.2em;margin-bottom:2em">Writing end-to-end tests has never been so fun</h3>
 					<p>
 						<a href="https://github.com/ramonvictor">@ramonvictor</a>
 					</p>
 				</section>
 
 				<section>
-					<h2>Why testing is so important?</h2>
+					<h2>Why is testing so important?</h2>
 					<blockquote style="line-height:1.2em">
 						Testing is about gaining confidence that your code does what you think it should do
 					</blockquote>
@@ -57,19 +57,19 @@
 					<h2>Whats the ideia behind E2E testing?</h2>
 					<ul>
 						<li>How would the users see my application?</li>
-						<li>Does my backend is comunicating with my frontend?</li>
+						<li>Is my backend communicating with my frontend?</li>
 						<li>Can I release this code?</li>
-						<li>It's <strong>NOT</strong> a replacement for Unit Testing!</li>
+						<li>It does <strong>NOT</strong> replace Unit Testing!</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>The dark side of E2E testing</h2>
 					<ul>
-						<li>It needs a spefic environment running</li>
+						<li>It needs a specific running environment</li>
 						<li>It's hard to write</li>
 						<li>It's difficult to debug</li>
-						<li>It's hard to keep the tests up to date</li>
+						<li>It's hard to keep the tests up-to-date</li>
 					</ul>
 				</section>
 
@@ -83,13 +83,13 @@
 					<h2>Protractor is built on top of <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">WebDriverJS</a></h2>
 
 					<p style="text-align: center">
-						<strong>Test Process</strong> (NodeJS, Java, etc)
+						<strong>Testing system</strong> (NodeJS, Java, etc)
 					</p>
 					<p style="text-align: center">
 						|
 					</p>
 					<p style="text-align: center">
-						<strong>Webdriver</strong> (aka selenium)
+						<strong>Webdriver</strong> (a.k.a. Selenium)
 					</p>
 					<p style="text-align: center">
 						|
@@ -109,9 +109,9 @@
 					<h2>Install</h2>
 					<ol style="font-size:1.2em;">
 						<li>
-							Download <a href="http://nodejs.org/download/">Noje.JS</a>
+							Download <a href="http://nodejs.org/download/">Node.JS</a>
 						</li>
-						<li><code>sudo npm install -g protractor</code></li>
+						<li><code>sudo npm install protractor -g</code></li>
 						<li><code>sudo webdriver-manager update</code></li>
 					</ol>
 
@@ -187,7 +187,7 @@ describe('angularjs homepage', function() {
 				</section>
 
 				<section>
-					<h2 style="font-size:3em;margin-top: 50px">Searching elements on the page</h2>
+					<h2 style="font-size:3em;margin-top: 50px">Searching for elements on the page</h2>
 				</section>
 
 				<section>
@@ -299,9 +299,9 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				<section>
 					<h2>The big picture</h2>
 					<ul>
-						<li>Page Objects</li>
-						<li>Exports and Require</li>
-						<li>Test specs</li>
+						<li>Page Objects - These are the js files where you map the elements and write the functions to perform actions.</li>
+						<li>Exports and Require - This is how you connect your Page Objects to your Test Specs</li>
+						<li>Test specs - These are the js files where you write your tests using jasmine sintax</li>
 					</ul>
 				</section>
 
@@ -348,13 +348,13 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
   this.greeting = element(by.binding('yourName'));
   // ...
 };
-module.exports.AngularHomepage = AngularHomepage;
+module.exports = AngularHomepage;
 </code></pre>
 					<strong>Your Test file</strong>
-<pre><code>var PageObject = require('./homepage.po');
+<pre><code>var AngularHomepage = require('./homepage.po.js');
 describe('HomePage Tests', function(){
-	var homePage = new PageObject.AngularHomepage();
-	homePage.nameInput.sendKeys("Rafael");
+	var angularHomepage = new AngularHomepage();
+	angularHomepage.nameInput.sendKeys('Rafael');
 	//...
 });
 </code></pre>
@@ -426,7 +426,9 @@ describe('HomePage Tests', function(){
 					</section>
 					<section>
 						<h3>Export xml results of your Automated Suites</h3>
-						<pre><code data-trim>(sudo) npm install jasmine-reporters</code></pre>
+						<pre><code data-trim>(sudo) npm install jasmine-reporters -g</code></pre>
+						<h4>And keep them in Timestamp directories</h4>
+						<pre><code data-trim>(sudo) npm install mkdirp -g</code></pre>
 						<pre><code data-trim>//config.js
 exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -434,16 +436,23 @@ exports.config = {
   capabilities: { 'browserName': 'chrome' },
 
   onPrepare: function() {
-    require ('jasmine-reporters');
-    jasmine.getEnv().addReporter(
-      new jasmine.JUnitXmlReporter('./', true, true)
-    );
+		var folderName = (new Date()).toString().split(' ').splice(1, 4).join(' ');
+		var mkdirp = require('/usr/local/lib/node_modules/mkdirp');
+		require('/usr/local/lib/node_modules/jasmine-reporters');
+
+		mkdirp('./reportsChrome/' + folderName, function(err) {
+			if (err)
+				console.error(err);
+			else {
+				jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter("./reportsChrome/" + folderName, true, true));
+			}
+		});
   },
 
   jasmineNodeOpts: {
     showColors: true
   }
-};</code></pre>
+};</code></pre>						
 					</section>
 					
 				</section>
@@ -498,19 +507,19 @@ exports.config = {
 };</code></pre>
 						
 					<p>
-						<a href = "https://github.com/angular/protractor/blob/master/referenceConf.js">See full list of available options on config.js
+						<a href = "https://github.com/angular/protractor/blob/master/referenceConf.js">See a full list of available options for a config.js
 						</a>
 					</p>
 				</section>
 
 				<section>
-					<h2 style="margin-top: 30px;font-size:3em">"But, I want to use Protractor in a non AngularJS app"</h2>
+					<h2 style="margin-top: 30px;font-size:3em">"But, I want to use Protractor in a non-AngularJS app"</h2>
 					<p class="fragment" style="font-size:2em">Sorry, you can't! :(</p>
 				</section>
 
 				<section>
-					<h2>Just kidding, of course,<br> you can! :)</h2>
-					<p style="font-size:.8em;margin-bottom:50px;">You just need to access the webdriver instance by using <code>browser.driver</code>:</p>
+					<h2>Just kidding, of course<br> you can! :)</h2>
+					<p style="font-size:.8em;margin-bottom:50px;">You only need to access the webdriver instance by using <code>browser.driver</code>:</p>
 					<pre class="mb-30"><code>
 browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 					</code></pre>
@@ -528,7 +537,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 
 				<section>
 					<h2>Protractor waits Angular to finish its work</h2>
-					<p>But, you can tell it not to be that smart about your non Angular app</p>
+					<p>Though you can tell it not to be that smart about your non-Angular app</p>
 <pre class="mb-30"><code style="font-size:1.3em;line-height:130%">beforeEach(function() {
    return browser.ignoreSynchronization = true;
 });</code></pre>
@@ -546,7 +555,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 					<pre class="mb-30"><code>beforeEach(function() {
    isAngularSite(false); // isAngularSite(true), if it's an Angular app!
 });</code></pre>
-					<p style="font-size:.6em;text-align:right;">Reference: <a href="http://ng-learn.org/2014/02/Protractor_Testing_With_Angular_And_Non_Angular_Sites/">Protractor - Testing Angular and Non Angular Sites</a></p>
+					<p style="font-size:.6em;text-align:right;">Reference: <a href="http://ng-learn.org/2014/02/Protractor_Testing_With_Angular_And_Non_Angular_Sites/">Protractor - Testing Angular and Non-Angular Sites</a></p>
 				</section>
 
 				<section>
@@ -555,7 +564,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 
 				<section>
 					<h2 style="margin-bottom:.3em"><a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a></h2>
-					<p style="font-size:.6em;margin-bottom:1.4em">It warns you on the fly whether all element() selectors could be found or not within your AngularJS view files.</p>
+					<p style="font-size:.6em;margin-bottom:1.4em">It warns you on the fly whether all element() selectors could be found within your AngularJS view files.</p>
 					<img style="border: none" src="https://raw.githubusercontent.com/ramonvictor/gulp-protractor-qa/master/assets/gulp-protractor-qa.gif" alt="Video screen demo of gulp-protractor-qa in action!">
 				</section>
 				
@@ -567,7 +576,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 				<section>
 					<h2>Final thoughts</h2>
 					<ul>
-						<li>E2E test is a complement to Unit tests</li>
+						<li>E2E testing is a complement to Unit testing</li>
 						<li>Avoid using CSS attributes</li>
 						<li>Write your tests with scalability in mind</li>
 						<li>Just have fun testing with Protractor</li>
@@ -589,7 +598,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 					<p style="font-size:2em; margin-bottom: 2em">
 						<a href="https://github.com/ramonvictor">@ramonvictor</a>
 					</p>
-					<p>Thanks for <a href="https://github.com/rafaelbattesti">@rafaelbattesti</a> contributions!</p>
+					<p>Thanks to <a href="https://github.com/rafaelbattesti">@rafaelbattesti</a> contributions!</p>
 				</section>
 
 			</div>
