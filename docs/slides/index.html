@@ -12,6 +12,8 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 		
 		<link rel="stylesheet" href="css/reveal.css">
@@ -238,14 +240,6 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
-					<h2>Searching elements best practices</h2>
-					<ul>
-						<li>Take advantage of AngularJS attributes using <code>by.model</code>, <code>by.repeater</code>, etc</li>
-						<li>Avoid using potential CSS attributes, mainly IDs and Classes.</li>
-					</ul>
-				</section>
-
-				<section>
 					<h2 style="font-size: 1.8em">Find out more in Protractor API</h2>
 					<ul>
 						<li><code>by.select()</code></li>
@@ -259,6 +253,13 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 					</ul>
 				</section>
 
+				<section>
+					<h2>Searching elements best practices</h2>
+					<ul>
+						<li>Take advantage of AngularJS attributes using <code>by.model</code>, <code>by.repeater</code>, etc</li>
+						<li>Avoid using potential CSS attributes, mainly IDs and Classes.</li>
+					</ul>
+				</section>
 
 				<section>
 					<h2 style="font-size:3em;margin-top: 50px">Executing events</h2>
@@ -287,7 +288,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 							<code>webdriver-manager start</code>
 						</li>
 						<li>Run:<br> <code style="font-size: 16px">/usr/local/lib/node_modules/protractor/bin/<strong>elementexplorer.js</strong> http://angularjs.org</code></li>
-						<li>Press 'tab' and play with element()</li>
+						<li>Press 'tab' and play with any element locator.</li>
 					</ol>
 				</section>
 
@@ -299,9 +300,9 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				<section>
 					<h2>The big picture</h2>
 					<ul>
-						<li>Page Objects - These are the js files where you map the elements and write the functions to perform actions.</li>
-						<li>Exports and Require - This is how you connect your Page Objects to your Test Specs</li>
-						<li>Test specs - These are the js files where you write your tests using jasmine sintax</li>
+						<li><strong>Page Objects</strong> - These are the js files where you map the elements and write the functions to perform actions;</li>
+						<li><strong>Exports and Require</strong> - This is how you connect your Page Objects to your Test Specs;</li>
+						<li><strong>Test specs</strong> - These are the js files where you write your tests using jasmine sintax.</li>
 					</ul>
 				</section>
 
@@ -316,10 +317,10 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
     |-- e2e/  
     |    |-- homepage/
     |    |     |-- homepage.po.js
-    |    |     |-- *_spec.js
+    |    |     |-- *.spec.js
     |    |-- profile/
     |    |     |-- profile.po.js
-    |    |     |-- *_spec.js
+    |    |     |-- *.spec.js
     |    |-- config.js
 </code></pre>
 				</section>
@@ -353,9 +354,9 @@ module.exports = AngularHomepage;
 					<strong>Your Test file</strong>
 <pre><code>var AngularHomepage = require('./homepage.po.js');
 describe('HomePage Tests', function(){
-	var angularHomepage = new AngularHomepage();
-	angularHomepage.nameInput.sendKeys('Rafael');
-	//...
+   var angularHomepage = new AngularHomepage();
+   angularHomepage.nameInput.sendKeys('Rafael');
+   //...
 });
 </code></pre>
 				</section>
@@ -405,9 +406,9 @@ describe('HomePage Tests', function(){
 };</code></pre>
 				</section>
 
-				<section>
 					<section>
 						<h2>Using <code>onPrepare</code></h2>
+						<p><strong>Set window size before starting the tests</strong></p>
 					<pre><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -423,39 +424,37 @@ describe('HomePage Tests', function(){
     showColors: true
   }
 };</code></pre>
-					</section>
-					<section>
-						<h3>Export xml results of your Automated Suites</h3>
-						<pre><code data-trim>(sudo) npm install jasmine-reporters -g</code></pre>
-						<h4>And keep them in Timestamp directories</h4>
-						<pre><code data-trim>(sudo) npm install mkdirp -g</code></pre>
-						<pre><code data-trim>//config.js
-exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
-
-  capabilities: { 'browserName': 'chrome' },
-
-  onPrepare: function() {
-		var folderName = (new Date()).toString().split(' ').splice(1, 4).join(' ');
-		var mkdirp = require('/usr/local/lib/node_modules/mkdirp');
-		require('/usr/local/lib/node_modules/jasmine-reporters');
-
-		mkdirp('./reportsChrome/' + folderName, function(err) {
-			if (err)
-				console.error(err);
-			else {
-				jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter("./reportsChrome/" + folderName, true, true));
-			}
-		});
-  },
-
-  jasmineNodeOpts: {
-    showColors: true
-  }
-};</code></pre>						
-					</section>
-					
 				</section>
+				<section>
+					<h2>Using <code>onPrepare</code></h2>
+					<p><strong>Export xml results of your Automated Suites</strong></p>
+					<p style="text-align:left;font-size:.8em;">First, install jasmine-reporters:</p>
+					<pre class="mb-30"><code data-trim>npm install jasmine-reporters</code></pre>
+					<p style="text-align:left;font-size:.8em;">And to keep xml results in Timestamp directories, install mkdirp package:</p>
+					<pre><code data-trim>npm install mkdirp</code></pre>
+				</section>
+				<section>
+					<h2>Using <code>onPrepare</code></h2>
+					<p><strong>Export xml results of your Automated Suites</strong></p>
+					<pre><code data-trim>//config.js
+exports.config = {
+  onPrepare: function() {
+    var folderName = (new Date()).toString().split(' ').splice(1, 4).join(' ');
+    var mkdirp = require('mkdirp');
+    var newFolder = "./reports/" + folderName;
+    require('jasmine-reporters');
+    
+    mkdirp(newFolder, function(err) {
+      if (err) {
+        console.error(err);
+      } else {
+        jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter(newFolder, true, true));
+      }
+    });
+  },
+};</code></pre>	
+				</section>
+					
 
 				<section>
 					<h2>Using <code>params</code></h2>
@@ -465,12 +464,13 @@ exports.config = {
 
   capabilities: { 'browserName': 'chrome' },
 
+  // This can be changed via the command line as:
+  // --params.login.user 'ngrocks'
   params: {
-    timestamp : Date.now()
-  },
-
-  onPrepare: function() {
-     browser.driver.manage().window().setSize(1600, 800);
+    login: {
+      user: 'protractor-br',
+      password: '#ng123#' 
+    }
   },
  
   jasmineNodeOpts: { showColors: true }
@@ -480,12 +480,15 @@ exports.config = {
 				<section>
 					<h2>Using <code>params</code></h2>
 					<p>Your test</p>
-					<pre><code data-trim>describe('angular homepage', function() {
-  
-  it('should add my name', function() {
-    element( by.model('yourName') ).sendKeys('Ramon Victor ' + browser.params.timestamp);
-    expect( element(by.binding('yourName') ).getText() )
-    	.toEqual('Ramon Victor ' + browser.params.timestamp);
+					<pre><code data-trim>describe('login page', function() {
+
+  var params = browser.params;
+
+  it('should login successfully', function() {
+    element( by.model('username') ).sendKeys( params.login.user );
+    element( by.model('password') ).sendKeys( params.login.password );
+    element( by.css('[ng-click="login()"]') ).click();
+    expect( element(by.binding('username') ).getText() ).toEqual( params.login.user );
   });   
 
 });</code></pre>
@@ -537,7 +540,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 
 				<section>
 					<h2>Protractor waits Angular to finish its work</h2>
-					<p>Though you can tell it not to be that smart about your non-Angular app</p>
+					<p style="font-size:.9em;">Though you can tell it not to be that smart about your non-Angular app:</p>
 <pre class="mb-30"><code style="font-size:1.3em;line-height:130%">beforeEach(function() {
    return browser.ignoreSynchronization = true;
 });</code></pre>
