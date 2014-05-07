@@ -16,3 +16,10 @@ A step-by-step guide presentation on Protractor end-to-end testing.
 
 > If you are looking for the official documentation, you can find it here: [https://github.com/angular/protractor/](https://github.com/angular/protractor/).
 
+## Contributing
+
+##### Have you found a problem to fix?
+Fork the repo and send a pull request. Your contribution is really welcome.
+
+##### Would you like to suggest new slides?
+Add an issue and let's discuss about that.
