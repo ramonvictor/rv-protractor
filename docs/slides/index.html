@@ -48,7 +48,12 @@
 				</section>
 
 				<section>
-					<h2>Why is testing so important?</h2>
+					<h2>Table of contents</h2>
+					<div id="table-of-contents"></div>
+				</section>
+
+				<section>
+					<h2 class="slide-header">Why is testing so important?</h2>
 					<blockquote style="line-height:1.2em">
 						Testing is about gaining confidence that your code does what you think it should do
 					</blockquote>
@@ -56,7 +61,7 @@
 				</section>
 
 				<section>
-					<h2>Whats the idea behind E2E testing?</h2>
+					<h2 class="slide-header">Whats the idea behind E2E testing?</h2>
 					<ul>
 						<li>How would the users see my application?</li>
 						<li>Is my backend communicating with my frontend?</li>
@@ -66,7 +71,7 @@
 				</section>
 
 				<section>
-					<h2>The dark side of E2E testing</h2>
+					<h2 class="slide-header">The dark side of E2E testing</h2>
 					<ul>
 						<li>It needs a specific running environment</li>
 						<li>It's hard to write</li>
@@ -82,7 +87,7 @@
 				</section>
 
 				<section>
-					<h2>Protractor is built on top of <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">WebDriverJS</a></h2>
+					<h2 class="slide-header">Protractor is built on top of <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">WebDriverJS</a></h2>
 
 					<p style="text-align: center">
 						<strong>Testing system</strong> (NodeJS, Java, etc)
@@ -108,7 +113,7 @@
 				</section>
 				
 				<section>
-					<h2>Install</h2>
+					<h2 class="slide-header">Install</h2>
 					<ol style="font-size:1.2em;">
 						<li>
 							Download <a href="http://nodejs.org/download/">Node.JS</a>
@@ -120,7 +125,7 @@
 				</section>
 
 				<section>
-					<h2>Setup a conf.js file</h2>
+					<h2 class="slide-header">Setup a conf.js file</h2>
 					<pre><code>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -138,7 +143,7 @@
 				</section>
 
 				<section>
-					<h2>Write your tests using <a href="http://jasmine.github.io/2.0/introduction.html">Jasmine</a> and WebdriverJS</h2>
+					<h2 class="slide-header">Write your tests using <a href="http://jasmine.github.io/2.0/introduction.html">Jasmine</a> and WebdriverJS</h2>
 <pre><code>describe('by model', function() {
    it('should find an element by text input model', function() {
      var username = element(by.model('username'));
@@ -154,7 +159,7 @@
 				</section>
 
 				<section>
-					<h2>Protractor global variables</h2>
+					<h2 class="slide-header">Protractor global variables</h2>
 					<ul>
 						<li><code>browser</code>: <code>browser.get()</code></li>
 						<li><code>element</code> and <code>by</code>: <code>element(by.model('yourName'))</code></li>
@@ -180,7 +185,7 @@ describe('angularjs homepage', function() {
 				</section>
 
 				<section>
-					<h2>Let's run it?</h2>
+					<h2 class="slide-header">Let's run it?</h2>
 					<p>First things first, open the terminal and start the webdriver server:
 					</p>
 					<pre style="margin-bottom:40px"><code>webdriver-manager start</code></pre>
@@ -193,7 +198,7 @@ describe('angularjs homepage', function() {
 				</section>
 
 				<section>
-					<h2 style="font-size:1.5em;"><code>element()</code> vs <code>element.all()</code></h2>
+					<h2 class="slide-header" style="font-size:1.5em;"><code>element()</code> vs <code>element.all()</code></h2>
 					<p>Single element</p>
 					<pre class="mb-30"><code>element( by.binding('appName') );</code></pre>
 					<p>Collection of elements</p>
@@ -262,7 +267,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
-					<h2 style="font-size:3em;margin-top: 50px">Executing events</h2>
+					<h2 class="slide-header" style="font-size:3em;margin-top: 50px">Executing events</h2>
 				</section>
 
 				<section>
@@ -282,7 +287,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
-					<h2>Debugging using elementexplorer</h2>
+					<h2 class="slide-header">Debugging using elementexplorer</h2>
 					<ol>
 						<li>Start your webdriver server:<br>
 							<code>webdriver-manager start</code>
@@ -293,7 +298,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
-					<h2 style="font-size:3em;margin: 50px 0 30px;">Maintanable Tests</h2>
+					<h2 class="slide-header" style="font-size:3em;margin: 50px 0 30px;">Maintanable Tests</h2>
 					<h3>Best practices to organize your tests</h3>
 				</section>
 
@@ -307,7 +312,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
-					<h2>Tests directory structure</h2>
+					<h2 class="slide-header">Tests directory structure</h2>
 <pre><code style="font-size:1.1em;line-height:130%">projectfolder/
   |-- css/
   |-- js/
@@ -326,7 +331,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
-					<h2>Page Objects</h2>
+					<h2 class="slide-header">Page Objects</h2>
 					<pre><code data-trim>var AngularHomepage = function() {
   this.nameInput = element(by.model('yourName'));
   this.greeting = element(by.binding('yourName'));
@@ -342,7 +347,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 				</section>
 
 				<section>
-					<h2>Node.JS exports and require</h2>
+					<h2 class="slide-header">Node.JS exports and require</h2>
 					<strong>Your Page Object file</strong>
 					<pre><code>var AngularHomepage = function() {
   this.nameInput = element(by.model('yourName'));
@@ -366,7 +371,7 @@ describe('HomePage Tests', function(){
 				</section>
 
 				<section>
-					<h2>Separate your tests in various test suites</h2>
+					<h2 class="slide-header">Separate your tests in various test suites</h2>
 <pre><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
   capabilities: { 'browserName': 'chrome' },
@@ -385,7 +390,7 @@ describe('HomePage Tests', function(){
 				</section>
 				
 				<section>
-					<h2>Enable <code>multiCapabilities</code></h2>
+					<h2 class="slide-header">Enable <code>multiCapabilities</code></h2>
 					<pre><code>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -407,7 +412,7 @@ describe('HomePage Tests', function(){
 				</section>
 
 					<section>
-						<h2>Using <code>onPrepare</code></h2>
+						<h2 class="slide-header">Using <code>onPrepare</code></h2>
 						<p><strong>Set window size before starting the tests</strong></p>
 					<pre><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -457,7 +462,7 @@ exports.config = {
 					
 
 				<section>
-					<h2>Using <code>params</code></h2>
+					<h2 class="slide-header">Using <code>params</code></h2>
 					<p>Your config.js</p>
 					<pre><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -495,7 +500,7 @@ exports.config = {
 				</section>
 
 				<section>
-					<h2>Using <code>jasmineNodeOpts</code></h2>
+					<h2 class="slide-header">Using <code>jasmineNodeOpts</code></h2>
 					<pre class="mb-30"><code data-trim>exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -516,7 +521,7 @@ exports.config = {
 				</section>
 
 				<section>
-					<h2 style="margin-top: 30px;font-size:3em">"But, I want to use Protractor in a non-AngularJS app"</h2>
+					<h2 class="slide-header" style="margin-top: 30px;font-size:3em">"But, I want to use Protractor in a non-AngularJS app"</h2>
 					<p class="fragment" style="font-size:2em">Sorry, you can't! :(</p>
 				</section>
 
@@ -566,7 +571,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 				</section>
 
 				<section>
-					<h2 style="margin-bottom:.3em"><a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a></h2>
+					<h2 class="slide-header" style="margin-bottom:.3em"><a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a></h2>
 					<p style="font-size:.6em;margin-bottom:1.4em">It warns you on the fly whether all element() selectors could be found within your AngularJS view files.</p>
 					<img style="border: none" src="https://raw.githubusercontent.com/ramonvictor/gulp-protractor-qa/master/assets/gulp-protractor-qa.gif" alt="Video screen demo of gulp-protractor-qa in action!">
 				</section>
@@ -577,7 +582,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 				</section>
 
 				<section>
-					<h2>Final thoughts</h2>
+					<h2 class="slide-header">Final thoughts</h2>
 					<ul>
 						<li>E2E testing is a complement to Unit testing</li>
 						<li>Avoid using CSS attributes</li>
@@ -587,7 +592,7 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 				</section>
 
 				<section>
-					<h2>Learning Resources</h2>
+					<h2 class="slide-header">Learning Resources</h2>
 					<ul>
 						<li><a href="https://github.com/angular/protractor/blob/master/docs/getting-started.md">Official Getting Started at Github</a></li>
 						<li><a href="http://www.youtube.com/watch?v=aQipuiTcn3U">NG-Conf 2014 presentation</a></li>
@@ -640,6 +645,30 @@ browser.driver.find(By.css('[data-ptor="submit-btn"]'));
 				]
 			});
 			
+		</script>
+		<script src="js/zepto.min.js"></script>
+		<script>
+			Zepto(function($){
+
+				var tableOfContents = $('#table-of-contents');
+				var tableList = $('<ol />')
+
+			  	$('.slide-header').each(function(index){
+			  		var _self = $(this),
+			  			hash = '#/' + _self.closest('section').index();
+			  		
+			  		tableList.append([ 
+			  			'<li>',
+			  				'<a href="' + hash + '">',
+			  					_self.text(),
+			  				'</a>',
+			  			'</li>'
+			  		].join(''));
+			  		
+				});
+
+				tableOfContents.html( tableList );
+			});
 		</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

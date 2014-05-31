@@ -179,3 +179,14 @@ body {
   box-shadow: none;
   font-size: 1.7em;
 }
+
+#table-of-contents ul{
+	overflow: hidden;
+}
+
+#table-of-contents li{
+	width: 50%;
+	float: left;
+	font-size: 18px;
+	line-height: 1.3em;
+}
