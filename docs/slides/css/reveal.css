@@ -413,22 +413,6 @@ body {
 	z-index: 1;
 	
 	text-align: center;
-
-	-webkit-transition: -webkit-perspective .4s ease;
-	   -moz-transition: -moz-perspective .4s ease;
-	    -ms-transition: -ms-perspective .4s ease;
-	     -o-transition: -o-perspective .4s ease;
-	        transition: perspective .4s ease;
-	
-	-webkit-perspective: 600px;
-	   -moz-perspective: 600px;
-	    -ms-perspective: 600px;
-	        perspective: 600px;
-
-	-webkit-perspective-origin: 0% 25%;
-	   -moz-perspective-origin: 0% 25%;
-	    -ms-perspective-origin: 0% 25%;
-	        perspective-origin: 0% 25%;
 }
 
 .reveal .slides>section,
@@ -1006,5 +990,38 @@ body {
 .reveal aside.notes {
 	display: none;
 }
+
+/*********************************************
+ * FADE TRANSITION
+ *********************************************/
+
+.reveal .slides section[data-transition=fade],
+.reveal.fade .slides section,
+.reveal.fade .slides>section>section {
+    -webkit-transform: none;
+	   -moz-transform: none;
+	    -ms-transform: none;
+	     -o-transform: none;
+	        transform: none;
+
+	-webkit-transition: opacity 0.5s;
+	   -moz-transition: opacity 0.5s;
+	    -ms-transition: opacity 0.5s;
+	     -o-transition: opacity 0.5s;
+	        transition: opacity 0.5s;
+}
+
+
+.reveal.fade.overview .slides section,
+.reveal.fade.overview .slides>section>section,
+.reveal.fade.overview-deactivating .slides section,
+.reveal.fade.overview-deactivating .slides>section>section {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	    -ms-transition: none;
+	     -o-transition: none;
+	        transition: none;
+}
+
 
 
