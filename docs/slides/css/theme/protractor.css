@@ -180,13 +180,17 @@ body {
   font-size: 1.7em;
 }
 
-#table-of-contents ul{
-	overflow: hidden;
+#table-of-contents ol{
+	list-style-position: inside;
+	-moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
 }
 
 #table-of-contents li{
-	width: 50%;
-	float: left;
 	font-size: 18px;
 	line-height: 1.3em;
 }
