@@ -1,9 +1,8 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
 	<head>
 		<meta charset="utf-8">
-		
+
 		<title>Protractor for AngularJS: writing end-to-end tests has never been so fun</title>
 
 		<meta name="description" content="A step-by-step presentaion on Protractor End-to-End Testing for AngularJS">
@@ -11,11 +10,10 @@
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		
+
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/protractor.css" id="theme">
 
@@ -31,9 +29,7 @@
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 	</head>
-	
 	<body>
-		
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
@@ -104,14 +100,13 @@
 					<p style="text-align: center">
 						<strong>Your AngularJS App</strong>
 					</p>
-					
 				</section>
 
 				<section>
 					<img src="img/protractor-architecture.png" height="500" alt="Protractor Architecture" style="border:none;box-shadow:none;margin-bottom:40px">
 					<p style="font-size: .6em;text-align: right;">Reference: <a href="http://www.thoughtworks.com//insights/blog/testing-angularjs-apps-protractor">Testing AngularJS apps with Protractor</a></p>
 				</section>
-				
+
 				<section>
 					<h2 class="slide-header">Install</h2>
 					<ol style="font-size:1.2em;">
@@ -148,10 +143,10 @@
    it('should find an element by text input model', function() {
      var username = element(by.model('username'));
      var name = element(by.binding('username'));
-   
+
      username.clear();
      expect(name.getText()).toEqual('');
-   
+
      username.sendKeys('Jane Doe');
      expect(name.getText()).toEqual('Jane Doe');
    });
@@ -251,7 +246,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 						<li><code>by.partialButtonText()</code></li>
 						<li><code>elementArrayFinder.each()</code></li>
 						<li>
-							<a href="https://github.com/angular/protractor/blob/master/docs/api.md">
+							<a href="http://angular.github.io/protractor/#/api">
 								Full list of available methods
 							</a>
 						</li>
@@ -286,6 +281,38 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
 					<pre><code>&lt;textarea ng-model="commentText">&lt;textarea></code></pre>
 				</section>
 
+
+				<section>
+					<h2 style="font-size:3em;margin-top:100px" class="slide-header">Promises and the Control Flow</h2>
+				</section>
+
+				<section>
+					<h2>Promises based</h2>
+					<p>All Protractor methods are asynchronous and return <a href="https://www.promisejs.org/">promises</a>.</p>
+<pre><code style="font-size:1.2em;line-height:150%">// Example of getText() promise
+element( by.model('zipcode') ).getText()
+  .then(function(val) {
+    var num = val.substring(0, 4);
+    var isNum = !isNaN(num);
+    expect( isNum ).toBeTruthy();
+  });
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Control Flow</h2>
+					<p>WebDriverJS maintains a queue of pending promises, called the <a href="https://github.com/angular/protractor/blob/master/docs/control-flow.md">control flow</a>, to keep execution organized.</p>
+<pre><code>it('should find an element by text input model', function() {
+  browser.get('#/home'); // (1) method browser.get
+
+  // (2) method by.binding
+  var login = element(by.binding('login'));
+  // (3) method getText
+  expect(login.getText()).toEqual('User');
+});</code></pre>
+					<p>In the example above, the control flow would execute the queue following the sequence we see in the comments. Basically method (2) will only run once <code>browser.get()</code> promise is resolved, and so on.</p>
+				</section>
+
 				<section>
 					<h2 class="slide-header">Debugging using elementexplorer</h2>
 					<ol>
@@ -317,9 +344,9 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
   |-- css/
   |-- js/
   |-- img/
-  |-- tests/    
-    |-- unit/           
-    |-- e2e/  
+  |-- tests/
+    |-- unit/
+    |-- e2e/
     |    |-- homepage/
     |    |     |-- homepage.po.js
     |    |     |-- *.spec.js
@@ -358,7 +385,7 @@ module.exports = AngularHomepage;
 </code></pre>
 					<strong>Your Test file</strong>
 <pre><code>var AngularHomepage = require('./homepage.po.js');
-describe('HomePage Tests', function(){
+describe('HomePage Tests', function() {
    var angularHomepage = new AngularHomepage();
    angularHomepage.nameInput.sendKeys('Rafael');
    //...
@@ -384,11 +411,11 @@ describe('HomePage Tests', function(){
   jasmineNodeOpts: { showColors: true }
 };
 </code></pre>
-				<strong>Running specific suite of tests</strong>
-				<pre><code>protractor protractor.conf.js --suite homepage
-				</code></pre>
+					<strong>Running specific suite of tests</strong>
+					<pre><code>protractor protractor.conf.js --suite homepage
+					</code></pre>
 				</section>
-				
+
 				<section>
 					<h2 class="slide-header">Enable <code>multiCapabilities</code></h2>
 					<pre><code>exports.config = {
@@ -397,7 +424,7 @@ describe('HomePage Tests', function(){
   multiCapabilities: [
 	{
 	  'browserName' : 'chrome'
-	}, 
+	},
 	{
 	  'browserName' : 'firefox'
 	}
@@ -424,7 +451,7 @@ describe('HomePage Tests', function(){
   onPrepare: function() {
      browser.driver.manage().window().setSize(1600, 800);
   },
- 
+
   jasmineNodeOpts: {
     showColors: true
   }
@@ -448,7 +475,7 @@ exports.config = {
     var mkdirp = require('mkdirp');
     var newFolder = "./reports/" + folderName;
     require('jasmine-reporters');
-    
+
     mkdirp(newFolder, function(err) {
       if (err) {
         console.error(err);
@@ -457,9 +484,8 @@ exports.config = {
       }
     });
   },
-};</code></pre>	
+};</code></pre>
 				</section>
-					
 
 				<section>
 					<h2 class="slide-header">Using <code>params</code></h2>
@@ -474,10 +500,10 @@ exports.config = {
   params: {
     login: {
       user: 'protractor-br',
-      password: '#ng123#' 
+      password: '#ng123#'
     }
   },
- 
+
   jasmineNodeOpts: { showColors: true }
 };</code></pre>
 				</section>
@@ -494,7 +520,7 @@ exports.config = {
     element( by.model('password') ).sendKeys( params.login.password );
     element( by.css('[ng-click="login()"]') ).click();
     expect( element(by.binding('username') ).getText() ).toEqual( params.login.user );
-  });   
+  });
 
 });</code></pre>
 				</section>
@@ -513,7 +539,6 @@ exports.config = {
     includeStackTrace: true
   }
 };</code></pre>
-						
 					<p>
 						<a href="https://github.com/angular/protractor/blob/master/docs/referenceConf.js">See a full list of available options for a config.js
 						</a>
@@ -529,18 +554,18 @@ exports.config = {
 					<h2>Just kidding, of course<br> you can! :)</h2>
 					<p style="font-size:.8em;margin-bottom:50px;">You only need to access the webdriver instance by using <code>browser.driver</code>:</p>
 					<pre class="mb-30"><code>
-browser.driver.find(by.css('[data-ptor="submit-btn"]'));
+browser.driver.findElement(by.css('[data-ptor="submit-btn"]'));
 					</code></pre>
 				</section>
 
 				<section>
 					<h2>It can be even more elegant</h2>
 					<h3 style="font-size:1em">In your config.js</h3>
-<pre class="mb-30"><code>onPrepare: function(){
+<pre class="mb-30"><code>onPrepare: function() {
    global.dvr = browser.driver;
 }</code></pre>
 					<h3 style="font-size:1em">In your test</h3>
-					<pre><code>dvr.find(by.css('[data-ptor="submit-btn"]'));</code></pre>
+					<pre><code>dvr.findElement(by.css('[data-ptor="submit-btn"]'));</code></pre>
 				</section>
 
 				<section>
@@ -554,13 +579,13 @@ browser.driver.find(by.css('[data-ptor="submit-btn"]'));
 				<section>
 					<h2>Let's make it more semantic?</h2>
 					<h3 style="font-size:1em">In your config.js</h3>
-<pre class="mb-30"><code>onPrepare: function(){
-   global.isAngularSite = function(flag){
+<pre class="mb-30"><code>onPrepare: function() {
+   global.isAngularSite = function(flag) {
       browser.ignoreSynchronization = !flag;
    };
 }</code></pre>
 					<h3 style="font-size:1em">In your test</h3>
-					<pre class="mb-30"><code>beforeEach(function() {
+<pre class="mb-30"><code>beforeEach(function() {
    isAngularSite(false); // isAngularSite(true), if it's an Angular app!
 });</code></pre>
 					<p style="font-size:.6em;text-align:right;">Reference: <a href="http://ng-learn.org/2014/02/Protractor_Testing_With_Angular_And_Non_Angular_Sites/">Protractor - Testing Angular and Non-Angular Sites</a></p>
@@ -575,9 +600,9 @@ browser.driver.find(by.css('[data-ptor="submit-btn"]'));
 					<p style="font-size:.6em;margin-bottom:1.4em">It warns you on the fly whether all element() selectors could be found within your AngularJS view files.</p>
 					<img style="border: none" src="https://raw.githubusercontent.com/ramonvictor/gulp-protractor-qa/master/assets/gulp-protractor-qa.gif" alt="Video screen demo of gulp-protractor-qa in action!">
 				</section>
-				
+
 				<section>
-					<h2 style="font-size: 1.8em;">How to use <a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a>?</h2>	
+					<h2 style="font-size: 1.8em;">How to use <a href="https://github.com/ramonvictor/gulp-protractor-qa">gulp-protractor-qa</a>?</h2>
 					<iframe width="740" height="416" src="//www.youtube.com/embed/mhJDhIvaKJo" frameborder="0" allowfullscreen></iframe>
 				</section>
 
@@ -596,8 +621,9 @@ browser.driver.find(by.css('[data-ptor="submit-btn"]'));
 					<ul>
 						<li><a href="http://protractortest.org">Protractortest.org</a></li>
 						<li><a href="https://github.com/angular/protractor/blob/master/docs/toc.md">Official Getting Started at Github</a></li>
-						<li><a href="http://www.youtube.com/watch?v=aQipuiTcn3U">NG-Conf 2014 presentation</a></li>
-						<li><a href="https://www.youtube.com/watch?v=idb6hOxlyb8">[screencast] An Introduction to AngularJS E2E Testing with Protractor</a></li>
+						<li><a href="http://www.youtube.com/watch?v=aQipuiTcn3U">NG-Conf 2014 - End to End Angular Testing</a></li>
+						<li><a href="https://www.youtube.com/watch?v=_2Pt6Xx94Bc">NG-Conf 2015 - Accessibility Design Made Easy</a></li>
+						<li><a href="https://www.youtube.com/watch?v=idb6hOxlyb8">An Introduction to AngularJS E2E Testing with Protractor</a></li>
 						<li><a href="http://www.ng-newsletter.com/posts/practical-protractor.html">Practical End-to-End Testing with Protractor</a></li>
 					</ul>
 				</section>
@@ -609,9 +635,7 @@ browser.driver.find(by.css('[data-ptor="submit-btn"]'));
 					</p>
 					<p>Thanks to <a href="https://github.com/rafaelbattesti">@rafaelbattesti</a> contributions!</p>
 				</section>
-
 			</div>
-			
 		</div>
 		<iframe src="http://ghbtns.com/github-btn.html?user=ramonvictor&repo=rv-protractor&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20" style="position: absolute; top: 20px; left: 20px; z-index: 9999"></iframe>
 		<a href="https://github.com/ramonvictor/rv-protractor" style="position: absolute; top: 0; right: 0; z-index: 9999">
@@ -620,19 +644,14 @@ browser.driver.find(by.css('[data-ptor="submit-btn"]'));
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
-
 		<script>
-			
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
 				progress: true,
 				history: true,
 				rollingLinks: false,
-				
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: 'fade', // default/cube/page/concave/linear(2d)
+				theme: Reveal.getQueryHash().theme,
+				transition: 'fade',
 				mouseWheel : false,
 
 				// Optional libraries used to extend on reveal.js
@@ -646,30 +665,26 @@ browser.driver.find(by.css('[data-ptor="submit-btn"]'));
 					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } }
 				]
 			});
-			
 		</script>
 		<script src="js/zepto.min.js"></script>
 		<script>
-			Zepto(function($){
-
+			Zepto(function($) {
 				var tableOfContents = $('#table-of-contents');
-				var tableList = $('<ol />')
+				var tableList = $('<ol />');
 
-			  	$('.slide-header').each(function(index){
-			  		var _self = $(this),
-			  			hash = '#/' + _self.closest('section').index();
-			  		
-			  		tableList.append([ 
-			  			'<li>',
-			  				'<a href="' + hash + '">',
-			  					_self.text(),
-			  				'</a>',
-			  			'</li>'
-			  		].join(''));
-			  		
+				$('.slide-header').each(function(index) {
+					var _self = $(this);
+					var hash = '#/' + _self.closest('section').index();
+					tableList.append([
+						'<li>',
+							'<a href="' + hash + '">',
+								_self.text(),
+							'</a>',
+						'</li>'
+					].join(''));
 				});
 
-				tableOfContents.html( tableList );
+				tableOfContents.html(tableList);
 			});
 		</script>
 <script>
